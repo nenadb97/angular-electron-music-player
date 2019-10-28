@@ -1,0 +1,43 @@
+<div class="ui container center-screen">
+  <div class="row justify-content-center">
+      <div class="col-12">
+        <img src="'../../assets/logo.png" alt="..." class="img-thumbnail">
+      </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-12"><h4>{{ activeSong?.title }}</h4></div>
+  </div>
+  <br>
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="container">
+        <div class="row">
+          <div class="col-6 text-left">
+            {{ currentTime$ | async }}
+          </div>
+          <div class="col-6 text-right" *ngIf="player?.duration">
+            {{ durationTime }}
+          </div>
+        </div>
+      </div>
+      <div class="progress">
+        <div class="progress-bar bg-info" role="progressbar"
+             [ngStyle]="{'width': (currentProgress$ | async) + '%'}"
+             [attr.aria-valuenow]="(currentProgress$ | async) "
+             aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      <br>
+      <button type="button" class="btn btn-outline-dark" (click)="playPreviousSong()"><b>{{ '<<' }}</b></button>
+
+      <button type="button" class="btn btn-outline-dark" *ngIf="isPlaying" (click)="player.pause()">Stop</button>
+      <button type="button" class="btn btn-outline-dark" *ngIf="!isPlaying" (click)="playSong(activeSong)">Play</button>
+
+      <button type="button" class="btn btn-outline-dark" (click)="playNextSong()"><b>{{ '>>' }}</b></button>
+    </div>
+  </div>
+</div>
+  <audio #player
+         (timeupdate)="onTimeUpdate()"
+         (pause)="onPause()"></audio>

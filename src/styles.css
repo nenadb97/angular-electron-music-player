@@ -1,0 +1,8 @@
+.center-screen {
+    padding-bottom: 5% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    text-align: center !important;
+    min-height: 100vh !important;
+  }
